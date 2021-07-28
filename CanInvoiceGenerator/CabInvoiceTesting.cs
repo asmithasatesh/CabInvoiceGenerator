@@ -74,6 +74,40 @@ namespace CanInvoiceGeneratorTesting
                 Assert.AreEqual(expected, ex.message);
             }
         }
+        //UC 2- Total Fare for multiple Rides
+        [TestMethod]
+        [TestCategory("CalculatingTotalFareForMultipleRides")]
+        public void Given_MultipleRides_Return_TotalFare()
+        {
+            CabInvoiceCalculate cabInvoiceCalculate = new CabInvoiceCalculate(CabInvoiceCalculate.RideType.Premium);
+            Rides[] rides = { new Rides(2.0, 5), new Rides(0.1, 1) };
+            InvoiceSummary summary = new InvoiceSummary(2, 55.0);
+            InvoiceSummary expected = cabInvoiceCalculate.CalculateFare(rides);
+            Assert.AreEqual(summary.totalFare, expected.totalFare);
+        }
+        //UC 3 TC 3.1- Return total Total rides
+        [TestMethod]
+        [TestCategory("Enhanced Invoice")]
+        public void Given_MultipleRides_Return_TotalRides()
+        {
+            CabInvoiceCalculate cabInvoiceCalculate = new CabInvoiceCalculate(CabInvoiceCalculate.RideType.Premium);
+            Rides[] rides = { new Rides(2.0, 5), new Rides(0.1, 1) };
+            InvoiceSummary summary = new InvoiceSummary(2, 55.0);
+            InvoiceSummary expected = cabInvoiceCalculate.CalculateFare(rides);
+            Assert.AreEqual(summary.numOfRides, expected.numOfRides);
+        }
+        //UC 3 TC 3.2- Return total Average Ride
+        [TestMethod]
+        [TestCategory("Enhanced Invoice")]
+        public void Given_MultipleRides_Return_AverageFare()
+        {
+            CabInvoiceCalculate cabInvoiceCalculate = new CabInvoiceCalculate(CabInvoiceCalculate.RideType.Premium);
+            Rides[] rides = { new Rides(2.0, 5), new Rides(0.1, 1) };
+            InvoiceSummary summary = new InvoiceSummary(2, 55.0);
+            InvoiceSummary expected = cabInvoiceCalculate.CalculateFare(rides);
+            Assert.AreEqual(summary.avgFare, expected.avgFare);
+        }
     }
 }
+
 
