@@ -9,8 +9,8 @@ namespace CabInvoiceGenerate
 
         public double distance;
         public int time;
-        //Initialize distance and time for each ride
 
+        //Initialize distance and time for each ride
         public Rides(double distance, int time)
         {
             this.distance = distance;

@@ -11,6 +11,7 @@ namespace CabInvoiceGenerate
         double COST_PER_KM;
         int COST_PER_TIME;
         double MINIMUM_FARE;
+
     
         public enum RideType
         {
@@ -20,8 +21,8 @@ namespace CabInvoiceGenerate
         //Parameterised Constructor
         public CabInvoiceCalculate(RideType rideType)
         {
-            //Define values for Normal Ride
 
+            //Define values for Normal Ride
             if (rideType.Equals(RideType.Normal))
             {
                 COST_PER_KM = 10;
@@ -61,9 +62,11 @@ namespace CabInvoiceGenerate
             return Math.Max(MINIMUM_FARE, totalFare);
         }
 
+        //Method overloading
         public InvoiceSummary CalculateFare(Rides[] rides)
         {
             double totalFare = 0;
+            List<CabInvoiceCalculate> list = new List<CabInvoiceCalculate>();
             try
             {
                 if(rides.Length==0)
@@ -81,6 +84,8 @@ namespace CabInvoiceGenerate
             }
             return new InvoiceSummary(rides.Length, totalFare);
         }
+
+
 
     }
 }

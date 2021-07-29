@@ -107,6 +107,25 @@ namespace CanInvoiceGeneratorTesting
             InvoiceSummary expected = cabInvoiceCalculate.CalculateFare(rides);
             Assert.AreEqual(summary.avgFare, expected.avgFare);
         }
+        //UC 4- Return InVoice when queried by UserId
+        [TestMethod]
+        [TestCategory("User ID Invoice Summary")]
+        public void Given_UserId_Return_Invoice()
+        {
+            //Create two users
+            int userIdOne = 1, userIdTwo = 2;
+            RideRepository rideRepository = new RideRepository();
+            //Add value for User id One
+            Rides[] userOne = { new Rides(2.0, 5), new Rides(0.1, 1) };
+            rideRepository.UserRides(userIdOne, userOne, CabInvoiceCalculate.RideType.Premium);
+            //Add Ride value for User id One
+            Rides[] userTwo = { new Rides(2.0, 5), new Rides(0.1, 1) };
+            rideRepository.UserRides(userIdTwo, userTwo, CabInvoiceCalculate.RideType.Normal);
+
+            InvoiceSummary expected = new InvoiceSummary(2, 30.0);
+            InvoiceSummary actual = rideRepository.ReturnInvoicefromRepository(userIdTwo);
+            Assert.AreEqual(actual.avgFare, expected.avgFare);
+        }
     }
 }
 
